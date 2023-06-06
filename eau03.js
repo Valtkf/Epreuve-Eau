@@ -9,18 +9,23 @@ $>
 Afficher -1 si le paramètre est négatif ou mauvais.
 */
 
-const n = process.argv[2];
 
-const fibo = new Array(n);
-fibo[0] = 0
-fibo[1] = 1
-
-if (n < 0 || isNaN) {
-  console.log("erreur");
-}
-
+// fonction
 calc = ()=> {
   for (let i = 2; i < n; i = i + 1) {
     fibo[i] = fibo[i - 1] + fibo[i - 2]
   }
 }
+
+// gestion d'erreurs
+if (n < 0 || isNaN) {
+  console.log("erreur");
+}
+
+
+// parsing
+const n = process.argv[2];
+
+const fibo = new Array(n);
+fibo[0] = 0
+fibo[1] = 1
