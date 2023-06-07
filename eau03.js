@@ -9,23 +9,31 @@ $>
 Afficher -1 si le paramètre est négatif ou mauvais.
 */
 
-
 // fonction
-calc = ()=> {
-  for (let i = 2; i < n; i = i + 1) {
-    fibo[i] = fibo[i - 1] + fibo[i - 2]
-  }
+function fibonacci(nbr) {
+   let n1 = 0;
+   let n2 = 1;
+   let somme = 0;
+ 
+   for(let i = 2; i <= nbr; i++){
+      //somme des deux derniers nombres
+      somme = n1 + n2; 
+      //assigner la dernière valeur à la première
+      n1 = n2; 
+      //attribuer la somme au dernier
+      n2 = somme;
+   }
+ 
+   return nbr ? n2 : n1;
 }
-
-// gestion d'erreurs
-if (n < 0 || isNaN) {
-  console.log("erreur");
-}
-
 
 // parsing
-const n = process.argv[2];
+const input = parseInt(process.argv[2]);
 
-const fibo = new Array(n);
-fibo[0] = 0
-fibo[1] = 1
+// gestion d'erreurs
+if (isNaN(input) || input <= 0) {
+  console.log(-1);
+}
+
+// affiche du résultat
+console.log(fibonacci(input));
