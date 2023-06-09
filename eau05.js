@@ -16,26 +16,37 @@ error
 Afficher error et quitter le programme en cas de problèmes d’arguments.
 */
 
-const research = (subtext, text) => {
-    let sizeSubtext = subtext.length;
-    let sizeText = text.length;
-  
-    for (let i = 0; i <= sizeText - sizeSubtext; i++) {
-      let j = 0;
-      while (j < sizeSubtext && text[i + j] === subtext[j]) {
-        j++;
-      }
-  
-      // Vérifie si nous avons trouvé une correspondance complète
-      if (j === sizeSubtext) {
-        return true;
+// Vérifie si une chaîne de caractères se trouve dans une autre
+const checkSubstring = (str, substring) => {
+  if (typeof str !== 'string' || typeof substring !== 'string') {
+    console.log('error');
+    process.exit(1);
+  }
+
+  const strLength = str.length;
+  const substringLength = substring.length;
+
+  for (let i = 0; i <= strLength - substringLength; i++) {
+    let j;
+    for (j = 0; j < substringLength; j++) {
+      if (str[i + j] !== substring[j]) {
+        break;
       }
     }
-  
-    return false;
+    if (j === substringLength) {
+      return true;
+    }
   }
-  
-  const arg1 = process.argv[2].split('');
-  const arg2 = process.argv[3].split('');
-  
-  console.log(research(arg1, arg2));
+
+  return false;
+};
+
+// Récupère les chaînes de caractères à vérifier depuis les arguments de la ligne de commande
+const str = process.argv[2];
+const substring = process.argv[3];
+
+// Vérifie si la sous-chaîne se trouve dans la chaîne principale
+const result = checkSubstring(str, substring);
+
+// Affiche le résultat
+console.log(result);
