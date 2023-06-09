@@ -20,7 +20,7 @@ const research = (subtext, text) => {
     let sizeSubtext = subtext.length;
     let sizeText = text.length;
   
-    for (let i = 0; i <= sizeText - sizeSubtext + 1; i++) {
+    for (let i = 0; i <= sizeText - sizeSubtext; i++) {
       let j = 0;
       while (j < sizeSubtext && text[i + j] === subtext[j]) {
         j++;
