@@ -12,9 +12,25 @@ error
 Afficher error et quitter le programme en cas de problèmes d’arguments.
 */
 
-const oneCpitalLetter = () => {
-    const str = process.slice(2).join(" ");
-    let count = 0;
-    let result = "";
+const oneCapitalLetter = () => {
+    const args = process.argv.slice(2);
+    const sentence = args.join(" ");
+    const words = sentence.split(" ");
+    const regex = /[ \t\n]/;
+    
+    const capitalizedSentence = sentence.replace(/\b\w/g, (match) => match.toUpperCase());
 
+    if (args.length === 0) {
+        console.log("Veuillez écrire une phrase");
+    } if (regex.test(capitalizedSentence)) {
+        return capitalizedSentence;
+    } else { 
+        console.log("erreur");
+        process.exit();    
+    }
+
+    return capitalizedSentence;
 }
+
+const finalResult = oneCapitalLetter();
+console.log(finalResult);
