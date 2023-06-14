@@ -14,4 +14,20 @@ $> python exo.py test boom
 
 Afficher error et quitter le programme en cas de problèmes d’arguments.*/
 
+const searchArgInArray = (argToIterate) => {
+  const argumentToSearch = argToIterate[argToIterate.length - 1];
+  for (let i = 0; i < argToIterate.length - 1; i++) {
+    if (argToIterate[i] === argumentToSearch) {
+      return i;
+    }
+    if (argToIterate === argumentToSearch) {
+      return 0;
+    }
+  }
+  return -1;
+};
 
+const argToIterate = process.argv.slice(2);
+const finalResult = searchArgInArray(argToIterate);
+
+console.log(finalResult);
