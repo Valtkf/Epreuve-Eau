@@ -21,24 +21,36 @@ Afficher error et quitter le programme en cas de problèmes d’arguments.
 Wikipedia vous présentera une belle description de cet algorithme de tri.*/
 
 const sort = (tab) => {
-  let changed;
-  do {
-    changed = false;
+  for (let i = 0; i < tab.length; i++) {
+    if (isNaN(tab[i])) {
+      return "Erreur: Les éléments du tableau doivent être des nombres.";
+    }
+  }
+
+  let sorted = false;
+
+  while (!sorted) {
+    sorted = true;
+
     for (let i = 0; i < tab.length - 1; i++) {
-      if (isNaN(parseInt(tab[i]))) {
-        console.error("Erreur");
-        return;
-      }
-      if (parseInt(tab[i]) > parseInt(tab[i + 1])) {
-        const tmp = tab[i];
+      if (tab[i] > tab[i + 1]) {
+        let temp = tab[i];
         tab[i] = tab[i + 1];
-        tab[i + 1] = tmp;
-        changed = true;
+        tab[i + 1] = temp;
+
+        sorted = false;
       }
     }
-  } while (changed);
+  }
+
+  return tab;
 };
 
 const tab = process.argv.slice(2);
-sort(tab);
-console.log(tab);
+const result = sort(tab);
+
+if (typeof result === "string") {
+  console.error(result);
+} else {
+  console.log(result);
+}
