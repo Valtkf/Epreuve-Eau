@@ -19,11 +19,45 @@ Afficher error et quitter le programme en cas de problèmes d’arguments.
 
 
 Wikipedia vous présentera une belle description de cet algorithme de tri. */
-const selectionSort = (array) => {
-    for (let i = 0; i < array.length -1; i++)
+function selectionSort(args) {
+  const array = [];
+
+  // Convertir les arguments en nombres, en vérifiant si chaque élément est un nombre valide
+  for (let i = 0; i < args.length; i++) {
+    const number = Number(args[i]);
+
+    if (isNaN(number)) {
+      return "Erreur";
+    }
+
+    array.push(number);
+  }
+
+  for (let i = 0; i < array.length - 1; i++) {
     let indexMin = i;
-};
 
+    // Trouver l'indice de l'élément minimum dans le sous-tableau non trié
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[j] < array[indexMin]) {
+        indexMin = j;
+      }
+    }
 
+    // Échanger l'élément minimum avec l'élément à la position courante
+    if (indexMin !== i) {
+      swap(array, i, indexMin);
+    }
+  }
 
-const array = process.argv.slice(2);
+  return array;
+}
+
+function swap(array, index1, index2) {
+  const temp = array[index1];
+  array[index1] = array[index2];
+  array[index2] = temp;
+}
+
+const args = process.argv.slice(2);
+const sortedArray = selectionSort(args);
+console.log(sortedArray);
