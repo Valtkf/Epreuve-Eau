@@ -11,7 +11,12 @@ A E R T Y Z
 
 Afficher error et quitter le programme en cas de problèmes d’arguments.*/
 
-function insertionSort(array) {
+const errorHandling = () => {
+  console.log("error");
+  process.exit();
+};
+
+const insertionSort = (array) => {
   const length = array.length;
 
   for (let i = 1; i < length; i++) {
@@ -27,8 +32,17 @@ function insertionSort(array) {
   }
 
   return array;
-}
+};
 
-const array = process.argv.slice(2);
-const sortedArray = insertionSort(array);
-console.log(sortedArray);
+const sortArray = () => {
+  const array = process.argv.slice(2);
+
+  const isNumberArray = array.join("").match(/^\d+$/);
+  const sortedArray = isNumberArray
+    ? insertionSort(array.map(Number))
+    : insertionSort(array);
+
+  console.log(sortedArray.join(" "));
+};
+
+sortArray();
